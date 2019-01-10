@@ -12,6 +12,7 @@ import java.util.Date;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -44,6 +45,42 @@ public class LonelyTwitterActivity extends Activity {
 
 			}
 		});
+
+		// ----------------------------------------------------------------------------------------
+
+		/* Based on the Tweet class created
+		This is taking use of the constructor function
+		 */
+		Tweet firstTweet = new Tweet();
+		Tweet secondTweet = new Tweet();
+        Tweet thirdTweet = new Tweet();
+
+		firstTweet.setMessage("This is the first message");
+        secondTweet.setMessage("This is the second message");
+
+        /*
+        This is explaining the OVER-RIDING method functionality of Java
+        based on the syntax, the javac compiler will decide which instance of the method to use
+         */
+        thirdTweet.setMessage("First Message", "Second Message");
+
+        // Printing the output
+        String temp = firstTweet.getMessage();
+        String temp2 = secondTweet.getMessage();
+        System.out.println(temp);
+        System.out.println(temp2);
+
+        //Printing the output using Log
+        Log.i("The message is", temp);
+        Log.i("The message is", temp2);
+
+        /*
+        Depicting the functionality of Inheritance
+        */
+        ImportantTweet fourthTweet = new ImportantTweet();
+        fourthTweet.setMessage("Hello", "This is the Messsage");
+
+        // ----------------------------------------------------------------------------------------
 	}
 
 	@Override
