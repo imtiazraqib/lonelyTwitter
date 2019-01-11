@@ -48,7 +48,7 @@ public class LonelyTwitterActivity extends Activity {
 
 		// ----------------------------------------------------------------------------------------
 
-		/* Based on the Tweet class created
+		/* Based on the Tweet class created for Lab 1
 		This is taking use of the constructor function
 		 */
 		Tweet firstTweet = new Tweet();
