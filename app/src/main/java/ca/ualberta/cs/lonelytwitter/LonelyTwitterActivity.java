@@ -28,51 +28,67 @@ import com.google.gson.reflect.TypeToken;
 
 public class LonelyTwitterActivity extends Activity {
 
-	private static final String FILENAME = "file.sav";
-	private EditText bodyText;
-	private ListView oldTweetsList;
-	private ArrayList<ImportantTweet> tweetList = new ArrayList<ImportantTweet>();
-	private ArrayAdapter<ImportantTweet> adapter;
-	
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+    private static final String FILENAME = "file.sav";
+    private EditText bodyText;
+    private ListView oldTweetsList;
+    private ArrayList<ImportantTweet> tweetList = new ArrayList<ImportantTweet>();
+    private ArrayAdapter<ImportantTweet> adapter;
+
+    /**
+     * Called when the activity is first created.
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
 
 		/*
-		To find anything in drawable folder, use R.id.theidoftheobject
+		To find anything in drawable folder, use R.id.theIDofTheObject
 		 */
-		bodyText = (EditText) findViewById(R.id.body);
+        bodyText = (EditText) findViewById(R.id.body);
 
-		Button saveButton = (Button) findViewById(R.id.save);
+        Button saveButton = (Button) findViewById(R.id.save);
+        final Button clearButton = (Button) findViewById(R.id.clear);
 
-		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
+        oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
-		saveButton.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
 
-			public void onClick(View v) {
-				setResult(RESULT_OK);
-				String text = bodyText.getText().toString();
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+                String text = bodyText.getText().toString();
 
-				ImportantTweet tweet = new ImportantTweet();
-				tweet.setMessage(text);
-				tweetList.add(tweet);
+                ImportantTweet tweet = new ImportantTweet();
+                tweet.setMessage(text);
+                tweetList.add(tweet);
 
-				adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
 
                 saveInFile();
 
-				//saveInFile(text, new Date(System.currentTimeMillis()));
+                //saveInFile(text, new Date(System.currentTimeMillis()));
 				/*
 				This closes the app every time something is saved in the app
 				 */
-				//finish();
+                //finish();
 
-			}
-		});
+            }
+        });
 
-		// ----------------------------------------------------------------------------------------
+        clearButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+
+                adapter.clear();
+                oldTweetsList.setAdapter(adapter);
+
+                tweetList.clear();
+                saveInFile();
+            }
+        });
+
+        // ----------------------------------------------------------------------------------------
 
 		/* Based on the Tweet class created for Lab 1
 		This is taking use of the constructor function
@@ -107,23 +123,26 @@ public class LonelyTwitterActivity extends Activity {
 //        fourthTweet.setMessage("Hello", "This is the Messsage");
 
         // ----------------------------------------------------------------------------------------
-	}
+    }
 
-	@Override
-	protected void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
 
-		loadFromFile();
+        loadFromFile();
 		/*
 		Adapter is a binder between arrays
 		This will call toString which will give back the string ID
 		 */
-		adapter = new ArrayAdapter<ImportantTweet>(this, R.layout.list_item, tweetList);
-		oldTweetsList.setAdapter(adapter);
-	}
+        adapter = new ArrayAdapter<ImportantTweet>(this, R.layout.list_item, tweetList);
 
-	private void loadFromFile() {
+        oldTweetsList.setAdapter(adapter);
+
+
+    }
+
+    private void loadFromFile() {
 
         //ArrayList<String> tweets = new ArrayList<String>();
 
@@ -142,7 +161,8 @@ public class LonelyTwitterActivity extends Activity {
             https://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt
             on Jan 16, 2019
              */
-            Type type = new TypeToken<ArrayList<ImportantTweet>>() {}.getType();
+            Type type = new TypeToken<ArrayList<ImportantTweet>>() {
+            }.getType();
             tweetList = gson.fromJson(in, type);
 
 
@@ -156,8 +176,9 @@ public class LonelyTwitterActivity extends Activity {
         //return tweets.toArray(new String[tweets.size()]);
 
     }
-	private void saveInFile() {
-		try {
+
+    private void saveInFile() {
+        try {
 
 //			FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_APPEND);
 //			fos.write(new String(date.toString() + " | " + text)	.getBytes());
@@ -176,12 +197,13 @@ public class LonelyTwitterActivity extends Activity {
             gson.toJson(tweetList, out);
             out.close();
 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
 }
