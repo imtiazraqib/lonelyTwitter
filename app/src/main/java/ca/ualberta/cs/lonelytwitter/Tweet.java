@@ -7,7 +7,7 @@ Created by Imtiaz Raqib on January 09, 2019
 */
 
 // Declaring the class
-public class Tweet {
+public abstract class Tweet {
 
     // Define Attributes
     // Attributes are like variables
@@ -48,6 +48,18 @@ public class Tweet {
     public void setMessage(String tweetmessage, String message2){
         message = tweetmessage;
         this.message2 = message2;
+    }
+
+    /*
+    Checks if the superclass has a method called toString, if YES, then it overrides
+    If NO, then it gives a compiling error
+
+    Any class that is explicitly mentioning an "extends", will always extend Objects
+    Superclass here is Objects
+     */
+    @Override
+    public String toString() {
+        return message;
     }
 
 }

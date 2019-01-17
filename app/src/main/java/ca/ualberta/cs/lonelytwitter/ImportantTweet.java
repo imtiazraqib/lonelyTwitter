@@ -17,13 +17,14 @@ Created by Imtiaz Raqib on January 09, 2019
 */
 public class ImportantTweet extends Tweet {
 
-    public void ImportantTweet() {
+    public void ImportantTweet(String message) {
 
+        this.message = message;
     }
 
     public void setMessage(String firstMessage, String secondMessage) {
 
         message = firstMessage;
-        this.message2 = secondMessage;
+        message2 = secondMessage;
     }
 }
