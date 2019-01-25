@@ -1,10 +1,28 @@
+/*
+ * Class Name: Tweet
+ *
+ * Version 1.0
+ *
+ * Copyright 2019 TEAM07
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package ca.ualberta.cs.lonelytwitter;
 
 import java.util.Date;
 
-/*
-Created by Imtiaz Raqib on January 09, 2019
-*/
+/**
+ * Represents a tweet
+ * @author Imtiaz Raqib
+ * @version 1.0
+ * @see ImportantTweet
+ * @since 1.0
+ */
 
 // Declaring the class
 public abstract class Tweet {
@@ -45,6 +63,12 @@ public abstract class Tweet {
      This allows us to use the method in multiple different forms.
      Based on the syntax it is called in, javac will use the appropriate instance of the method.
       */
+
+    /**
+     *
+     * @param tweetmessage
+     * @param message2
+     */
     public void setMessage(String tweetmessage, String message2){
         message = tweetmessage;
         this.message2 = message2;

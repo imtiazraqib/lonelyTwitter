@@ -16,6 +16,10 @@ public abstract class currentMood {
         date = dateToSet;
     }
 
+    /**
+     *
+     * @return date
+     */
     // Setting up the Getter
     public Date getDate() {
         return date;
