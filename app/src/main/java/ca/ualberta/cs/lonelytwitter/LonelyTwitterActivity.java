@@ -1,3 +1,13 @@
+/*
+ * Copyright 2019 TEAM07
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package ca.ualberta.cs.lonelytwitter;
 
 import java.io.BufferedReader;
@@ -26,6 +36,16 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * This is the main Activity class
+ *
+ * @author Imtiaz Raqib
+ * @version 1.0
+ * @see Tweet
+ * @see ImportantTweet
+ * @since 1.0
+ */
+
 public class LonelyTwitterActivity extends Activity {
 
     private static final String FILENAME = "file.sav";
@@ -36,6 +56,13 @@ public class LonelyTwitterActivity extends Activity {
 
     /**
      * Called when the activity is first created.
+     *
+     * It gets the text that was written by the user using the body tag. It also implements the
+     * button for "Save" and "Clear".
+     * This method also views the Old Tweets that have been previously saved and not cleared by the
+     * user.
+     *
+     * @param savedInstanceState
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +81,10 @@ public class LonelyTwitterActivity extends Activity {
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * This is associated with a Listener to check when the "Save" button is pressed
+             * @param v
+             */
             public void onClick(View v) {
                 setResult(RESULT_OK);
                 String text = bodyText.getText().toString();
@@ -77,6 +108,10 @@ public class LonelyTwitterActivity extends Activity {
 
         clearButton.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * This is associated with a Listener to check when the "Clear" button is pressed
+             * @param v
+             */
             public void onClick(View v) {
                 setResult(RESULT_OK);
 
@@ -125,6 +160,10 @@ public class LonelyTwitterActivity extends Activity {
         // ----------------------------------------------------------------------------------------
     }
 
+    /**
+     * This method overrides the onStart y default of the activity to make sure the old tweets that
+     * were saved in the file by saveInFile() get loaded up and displayed as a List view.
+     */
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
@@ -142,6 +181,14 @@ public class LonelyTwitterActivity extends Activity {
 
     }
 
+    /**
+     * This method implements loading the saved tweets by clicking on the save button and displaying
+     * them as a list view.
+     *
+     * This method uses Google's GSON library for persistent data storage.
+     *
+     * @throws FileNotFoundException e
+     */
     private void loadFromFile() {
 
         //ArrayList<String> tweets = new ArrayList<String>();
@@ -177,6 +224,14 @@ public class LonelyTwitterActivity extends Activity {
 
     }
 
+    /**
+     * This method implements saving the new tweets by clicking on the save button and displaying
+     * them as a list view.
+     *
+     * This method uses Google's GSON library for persistent data storage.
+     *
+     * @throws FileNotFoundException e
+     */
     private void saveInFile() {
         try {
 

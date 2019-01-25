@@ -18,6 +18,7 @@ import java.util.Date;
 
 /**
  * Represents a tweet
+ *
  * @author Imtiaz Raqib
  * @version 1.0
  * @see ImportantTweet
@@ -42,17 +43,29 @@ public abstract class Tweet {
      */
 
     // This is a constructor
+
+    /**
+     * This is the constructor for the Tweet abstract class
+     */
     public void Tweet(){
 
         message="";
         date = null;
     }
 
+    /**
+     * Takes one string and sets it as a tweet message
+     * @param tweetmessage
+     */
     public void setMessage(String tweetmessage){
 
         message = tweetmessage;
     }
 
+    /**
+     * It returns the tweet as a string
+     * @return String
+     */
     public String getMessage(){
 
         return message;
@@ -65,7 +78,7 @@ public abstract class Tweet {
       */
 
     /**
-     *
+     * Takes two strings and sets it as a tweet message
      * @param tweetmessage
      * @param message2
      */
@@ -80,6 +93,13 @@ public abstract class Tweet {
 
     Any class that is explicitly mentioning an "extends", will always extend Objects
     Superclass here is Objects
+     */
+
+    /**
+     * This provides a string representation of the object that it is used for.
+     * Tweets are returned as a String object
+     *
+     * @return String
      */
     @Override
     public String toString() {
