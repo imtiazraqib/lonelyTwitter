@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "695786361755",
+    "firebase_url": "https://lonelytwitter-c0848.firebaseio.com",
+    "project_id": "lonelytwitter-c0848",
+    "storage_bucket": "lonelytwitter-c0848.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695786361755:android:988d2e0f27df0599",
+        "android_client_info": {
+          "package_name": "ca.ualberta.cs.lonelytwitter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695786361755-1h8m6pt499imqijg7iv5gmgrk16sphpj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.ualberta.cs.lonelytwitter",
+            "certificate_hash": "ec00670522a5ee32235c02e9c642e6ee5bf37a0e"
+          }
+        },
+        {
+          "client_id": "695786361755-djl0imnit4dj957ehddpdkdjkht8bj38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxqqr5yMBRLIek203ZktGoL8YFjiRwjpY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695786361755-djl0imnit4dj957ehddpdkdjkht8bj38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

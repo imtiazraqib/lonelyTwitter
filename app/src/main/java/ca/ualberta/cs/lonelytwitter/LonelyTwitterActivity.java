@@ -10,22 +10,17 @@
 
 package ca.ualberta.cs.lonelytwitter;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -33,8 +28,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * This is the main Activity class
@@ -43,6 +45,7 @@ import com.google.gson.reflect.TypeToken;
  * @version 1.0
  * @see Tweet
  * @see ImportantTweet
+ * @see NormalTweet
  * @since 1.0
  */
 
@@ -51,8 +54,10 @@ public class LonelyTwitterActivity extends Activity {
     private static final String FILENAME = "file.sav";
     private EditText bodyText;
     private ListView oldTweetsList;
-    private ArrayList<ImportantTweet> tweetList = new ArrayList<ImportantTweet>();
-    private ArrayAdapter<ImportantTweet> adapter;
+    private ArrayList<Tweet> tweetList = new ArrayList<Tweet>();
+    private ArrayAdapter<Tweet> adapter;
+
+
 
     /**
      * Called when the activity is first created.
@@ -72,12 +77,12 @@ public class LonelyTwitterActivity extends Activity {
 		/*
 		To find anything in drawable folder, use R.id.theIDofTheObject
 		 */
-        bodyText = (EditText) findViewById(R.id.body);
+        bodyText = findViewById(R.id.body);
 
-        Button saveButton = (Button) findViewById(R.id.save);
-        final Button clearButton = (Button) findViewById(R.id.clear);
+        Button saveButton = findViewById(R.id.save);
+        final Button clearButton = findViewById(R.id.clear);
 
-        oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
+        oldTweetsList = findViewById(R.id.oldTweetsList);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -89,9 +94,8 @@ public class LonelyTwitterActivity extends Activity {
                 setResult(RESULT_OK);
                 String text = bodyText.getText().toString();
 
-                ImportantTweet tweet = new ImportantTweet();
-                tweet.setMessage(text);
-                tweetList.add(tweet);
+                NormalTweet newTweet = new NormalTweet(text);
+                tweetList.add(newTweet);
 
                 adapter.notifyDataSetChanged();
 
@@ -174,9 +178,28 @@ public class LonelyTwitterActivity extends Activity {
 		Adapter is a binder between arrays
 		This will call toString which will give back the string ID
 		 */
-        adapter = new ArrayAdapter<ImportantTweet>(this, R.layout.list_item, tweetList);
+        adapter = new ArrayAdapter<Tweet>(this, R.layout.list_item, tweetList);
 
         oldTweetsList.setAdapter(adapter);
+
+        /*
+        Referencing the FireBase database
+         */
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+        myRef.addValueEventListener(new ValueEventListener() {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    ImportantTweet tweet = data.getValue(ImportantTweet.class);
+                    if (tweet != null) {
+                        Log.d(TAG, tweet.getMessage());
+                    }
+                }
+            }
+
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
     }
@@ -216,10 +239,11 @@ public class LonelyTwitterActivity extends Activity {
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
         //return tweets.toArray(new String[tweets.size()]);
 
     }

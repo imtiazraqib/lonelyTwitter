@@ -26,6 +26,8 @@ Created by Imtiaz Raqib on January 09, 2019
  it will not work.
 */
 
+import java.util.Date;
+
 /**
  * This represents a tweet and is mainly used to instantiate the abstract Tweet object
  *
@@ -34,27 +36,23 @@ Created by Imtiaz Raqib on January 09, 2019
  * @see Tweet
  * @since 1.0
  */
-public class ImportantTweet extends Tweet {
+public class ImportantTweet extends Tweet implements Tweetable {
 
-    /**
-     * This is the constructor that sets a message as a tweet that it gets as a string
-     *
-     * @param message
-     */
-    public void ImportantTweet(String message) {
+    public ImportantTweet() {
 
-        this.message = message;
     }
 
-    /**
-     * Takes two strings and sets them as tweets
-     *
-     * @param firstMessage
-     * @param secondMessage
-     */
-    public void setMessage(String firstMessage, String secondMessage) {
+    public ImportantTweet(String message){
+        super(message);
+    }
 
-        message = firstMessage;
-        message2 = secondMessage;
+    public ImportantTweet(String message, Date date) {
+        super(message, date);
+    }
+
+
+    @Override
+    public Boolean isImportant(){
+        return Boolean.TRUE;
     }
 }

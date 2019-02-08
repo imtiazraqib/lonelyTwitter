@@ -14,6 +14,7 @@
 
 package ca.ualberta.cs.lonelytwitter;
 
+
 import java.util.Date;
 
 /**
@@ -21,119 +22,70 @@ import java.util.Date;
  *
  * @author Imtiaz Raqib
  * @version 1.0
+ * @see NormalTweet
  * @see ImportantTweet
  * @since 1.0
  */
 
-// Declaring the class
 public abstract class Tweet {
 
-    // Define Attributes
-    // Attributes are like variables
-    String message;
-    String message2;
-    Date date;
+    private String message;
+    private Date date;
 
-    // Defining a method
-    /*
-    1. Give visibility, i.e., public, private, protected.
-    2. What is it returning? Nothing == "void"
-
-    Below is the Constructor function and the methods within the constructor function
-     */
-
-    // This is a constructor
-
-    /**
-     * This is the constructor for the Tweet abstract class
-     */
-    public void Tweet(){
-
-        message="";
-        date = null;
+    public Tweet(String message){
+        this.message = message;
+        this.date = new Date();
     }
 
-    /**
-     * Takes one string and sets it as a tweet message
-     * @param tweetmessage
-     */
-    public void setMessage(String tweetmessage){
 
-        message = tweetmessage;
-    }
+
+    public Tweet() {}
 
     /**
-     * It returns the tweet as a string
-     * @return String
-     */
-    public String getMessage(){
-
-        return message;
-    }
-
-    /*
-     OVER-RIDING the setMessage method
-     This allows us to use the method in multiple different forms.
-     Based on the syntax it is called in, javac will use the appropriate instance of the method.
-      */
-
-    /**
-     * Takes two strings and sets it as a tweet message
-     * @param tweetmessage
-     * @param message2
-     */
-    public void setMessage(String tweetmessage, String message2){
-        message = tweetmessage;
-        this.message2 = message2;
-    }
-
-    /*
-    Checks if the superclass has a method called toString, if YES, then it overrides
-    If NO, then it gives a compiling error
-
-    Any class that is explicitly mentioning an "extends", will always extend Objects
-    Superclass here is Objects
-     */
-
-    /**
-     * This provides a string representation of the object that it is used for.
-     * Tweets are returned as a String object
+     * Constructs Tweet objects
      *
-     * @return String
+     * @param message tweet message
+     * @param date tweet date
      */
-    @Override
-    public String toString() {
-        return message;
+    public Tweet(String message, Date date) {
+        this.message = message;
+        this.date = date;
     }
 
+    public abstract Boolean isImportant();
+
+
+    /**
+     * Sets tweet messages
+     *
+     * @param message Tweet message
+     * @throws TweetTooLongException
+     */
+
+
+    public void setMessage(String message) throws TweetTooLongException{
+        if (message.length() > 140){
+            throw new TweetTooLongException();
+        } else {
+            this.message = message;
+        }
+    }
+
+    public String getMessage(){
+        return this.message;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+//    @Override
+//    public String toString() {
+//        final String s = date.toString() + " | " + message;
+//        return s;
+//    }
 }
-
-// ------------------------------------------------------------
-// Animal tiger = new Animal();
-// Tiger would use all the attributes of Animal()
-
-/*
-class Animal{
-
-    String name;
-    int height;
-    int weight;
-
-    public void Animal(){
-
-        this.name = "basic";
-        height = 0;
-        weight = 0;
-
-    }
-
-    public void Animal(int h, int w){
-
-        // Similar to self.x in python3 class
-        this.height = h;
-        this.weight = w;
-    }
-}
-
-*/
-// ------------------------------------------------------------
