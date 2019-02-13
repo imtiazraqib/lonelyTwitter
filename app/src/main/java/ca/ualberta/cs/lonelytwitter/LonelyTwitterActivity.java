@@ -189,9 +189,9 @@ public class LonelyTwitterActivity extends Activity {
         myRef.addValueEventListener(new ValueEventListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    ImportantTweet tweet = data.getValue(ImportantTweet.class);
+                    NormalTweet tweet = data.getValue(NormalTweet.class);
                     if (tweet != null) {
-                        Log.d(TAG, tweet.getMessage());
+                        //Log.d(TAG, tweet.getMessage());
                     }
                 }
             }

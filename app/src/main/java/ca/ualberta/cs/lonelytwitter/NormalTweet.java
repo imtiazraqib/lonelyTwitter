@@ -4,6 +4,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
+
 /**
  * Created by watts1 on 9/12/17.
  */
@@ -16,7 +17,7 @@ public class NormalTweet extends Tweet {
         super(message);
         FirebaseDatabase myDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = myDatabase.getReference();
-        myRef.child("Tweets").setValue(this);
+        myRef.child("Tweets").push().setValue(this);
     }
 
     public NormalTweet(String message, Date date) {

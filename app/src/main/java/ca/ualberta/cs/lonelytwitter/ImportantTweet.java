@@ -27,6 +27,7 @@ Created by Imtiaz Raqib on January 09, 2019
 */
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * This represents a tweet and is mainly used to instantiate the abstract Tweet object

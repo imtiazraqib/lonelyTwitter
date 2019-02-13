@@ -16,6 +16,7 @@ package ca.ualberta.cs.lonelytwitter;
 
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Represents a tweet
@@ -50,6 +51,8 @@ public abstract class Tweet {
     public Tweet(String message, Date date) {
         this.message = message;
         this.date = date;
+
+
     }
 
     public abstract Boolean isImportant();
